@@ -5,7 +5,7 @@ import {
     GithubCommitActivity,
     GithubFilter,
     GithubResult,
-    GithubStateProps
+    GithubState
 } from "src/contracts/github";
 import { HomeState } from "src/modules/home/component";
 
@@ -40,7 +40,7 @@ export const homeReducer = (
     switch (action.type) {
         case GithubActionType.GITHUB_COMMIT_ACTIVITY_FETCH: {
             const nextState = (
-                update: GithubStateProps<GithubCommitActivity>
+                update: GithubState<GithubCommitActivity>
             ): HomeState => {
                 const githubCommitActivity = {
                     ...state.githubCommitActivity,
@@ -85,7 +85,7 @@ export const homeReducer = (
         }
         case GithubActionType.GITHUB_FILTER_UPDATE: {
             const newState = {
-                ...state,
+                ...state
             };
             newState.homeFilter.githubFilter = {
                 ...newState.homeFilter.githubFilter,

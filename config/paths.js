@@ -46,6 +46,8 @@ module.exports = {
     appHtml: resolveApp("public/index.html"),
     appIndexJs: resolveApp("src/index.tsx"),
     appPackageJson: resolveApp("package.json"),
+    appTypedocJson: resolveApp("typedoc.json"),
+    appDocumentation: resolveApp("documentation"),
     appSrc: resolveApp("src"),
     yarnLockFile: resolveApp("yarn.lock"),
     testsSetup: resolveApp("src/setupTests.ts"),

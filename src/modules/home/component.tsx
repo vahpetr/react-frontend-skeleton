@@ -9,13 +9,13 @@ import { githubCommitActivityFetchInitAction } from "src/actions/github";
 import { GithubCommitActivityChartComponent } from "src/components/github/charts/commit-activity";
 import { HomeSidebarComponent } from "src/components/home/sidebar";
 import { AppDispatch } from "src/contracts/app";
-import { GithubCommitActivity, GithubStateProps } from "src/contracts/github";
+import { GithubCommitActivity, GithubState } from "src/contracts/github";
 import { HomeFilter } from "src/contracts/home";
 import { AppRootState } from "src/modules/app";
 
 export interface HomeState {
     homeFilter: HomeFilter;
-    githubCommitActivity: GithubStateProps<GithubCommitActivity>;
+    githubCommitActivity: GithubState<GithubCommitActivity>;
 }
 
 export type HomeProps = HomeState & AppDispatch;

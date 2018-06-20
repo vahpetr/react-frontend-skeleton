@@ -8,7 +8,7 @@ Frintend skeleton web app
 npm install
 ```
 
-## Running the app
+## Run app
 
 ```bash
 # development watch
@@ -18,26 +18,21 @@ npm run start
 npm run build
 ```
 
-## Running the tests
+## Running tests
 
 ```bash
 # unit tests
 npm run test
 ```
 
-## Running the app in docker
+## Run app in docker
 
 ```sh
     docker build -t frontend-skeleton .
-    docker run -it --rm -p 10080:80 frontend-skeleton
+    docker run -it --rm -p 10080:80 --name frontend-skeleton frontend-skeleton
 ```
-
-## Documentation
-
-1. [Jest](https://basarat.gitbooks.io/typescript/docs/testing/jest.html) test framework .
-1. [Favicon](https://favicon.io/?text=F&shape=square&fontFamily=Leckerli+One&fontSize=125&fontColor=%23ffffff&backgroundColor=%232b9eeb) generator.
 
 ### TODO
 
-1. Add support enzyme
-1. Add saga spec test
+1. Add more comonent tests
+1. Add saga tests

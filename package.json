@@ -14,7 +14,8 @@
     "ncu": "ncu",
     "reinstall": "rimraf node_modules && npm install",
     "tsc": "tsc",
-    "tslint": "tslint --fix -c tslint.json -e **/node_modules/** -e **/build/** **/*.ts*"
+    "tslint": "tslint --fix -c tslint.json -e **/node_modules/** -e **/build/** **/*.ts*",
+    "documentation": "typedoc  --out ./documentation --tsconfig ./tsconfig.json ./src"
   },
   "devDependencies": {
     "@types/node": "9.6.7",
@@ -47,7 +48,6 @@
     "bootstrap": "4.1.0",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.1",
-    "copy-webpack-plugin": "4.5.1",
     "css-loader": "0.28.11",
     "dotenv": "5.0.1",
     "duplicate-package-checker-webpack-plugin": "2.1.0",
@@ -92,6 +92,8 @@
     "tslint-loader": "3.6.0",
     "tslint-react": "3.5.1",
     "tslint-sonarts": "1.6.0",
+    "typedoc": "0.11.1",
+    "typedoc-webpack-plugin": "1.1.4",
     "typescript": "2.8.3",
     "uglify-js": "3.3.22",
     "uglifyjs-webpack-plugin": "1.2.5",

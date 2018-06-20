@@ -40,14 +40,24 @@ export function* githubCommitActivityFetchSaga(
 export function* githubFilterUpdateSaga(
     action: AppAction<GithubFilter>
 ): SagaIterator {
-    yield put(appSuccessAction(GithubActionType.GITHUB_FILTER_UPDATE, action.payload));
+    yield put(
+        appSuccessAction(GithubActionType.GITHUB_FILTER_UPDATE, action.payload)
+    );
     yield call(githubCommitActivityFetchSaga, action);
 }
 
 export function* githubRootSaga(): SagaIterator {
     yield all([
         // TODO check throttle work, may be need use takeLatest or special saga effect realization
-        throttle(700, GithubActionType.GITHUB_COMMIT_ACTIVITY_FETCH_INIT, githubCommitActivityFetchSaga),
-        throttle(700, GithubActionType.GITHUB_FILTER_UPDATE_INIT, githubFilterUpdateSaga)
+        throttle(
+            700,
+            GithubActionType.GITHUB_COMMIT_ACTIVITY_FETCH_INIT,
+            githubCommitActivityFetchSaga
+        ),
+        throttle(
+            700,
+            GithubActionType.GITHUB_FILTER_UPDATE_INIT,
+            githubFilterUpdateSaga
+        )
     ]);
 }

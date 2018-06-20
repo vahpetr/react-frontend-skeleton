@@ -12,7 +12,6 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const getClientEnvironment = require("./env");
 const paths = require("./paths");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -26,7 +25,6 @@ const publicUrl = "";
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-const vscode = path.resolve(__dirname, "../node_modules/monaco-editor/dev/vs");
 const include = [paths.appSrc];
 
 const styleLoader = {
@@ -149,8 +147,6 @@ module.exports = {
             // Support React Native Web
             // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
             "react-native": "react-native-web",
-
-            vs: vscode,
 
             isarray: path.resolve(
                 __dirname,
@@ -293,13 +289,6 @@ module.exports = {
     },
     plugins: [
         // new BundleAnalyzerPlugin(),
-
-        new CopyWebpackPlugin([
-            {
-                from: vscode,
-                to: "vs"
-            }
-        ]),
 
         new DuplicatePackageCheckerPlugin({
             // Also show module that is requiring each duplicate package (default: false)

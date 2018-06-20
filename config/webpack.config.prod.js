@@ -14,8 +14,8 @@ const paths = require("./paths");
 const getClientEnvironment = require("./env");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
+const TypedocWebpackPlugin = require("typedoc-webpack-plugin");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -42,7 +42,6 @@ if (env.stringified["process.env"].NODE_ENV !== '"production"') {
 // Note: defined here because it will be used more than once.
 const cssFilename = "static/css/[name].[contenthash:8].css";
 
-const vscode = path.resolve(__dirname, "../node_modules/monaco-editor/dev/vs");
 const include = [paths.appSrc];
 
 const plugins = [];
@@ -176,8 +175,6 @@ module.exports = {
             // Support React Native Web
             // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
             "react-native": "react-native-web",
-
-            vs: vscode,
 
             isarray: path.resolve(
                 __dirname,
@@ -346,12 +343,39 @@ module.exports = {
     plugins: [
         ...plugins,
 
-        new CopyWebpackPlugin([
+        new TypedocWebpackPlugin(
             {
-                from: vscode,
-                to: "vs"
+                out: paths.appDocumentation,
+                tsconfig: paths.appTsConfig,
+                excludePrivate: true
+            },
+            paths.appSrc
+        ),
+
+        new DuplicatePackageCheckerPlugin({
+            // Also show module that is requiring each duplicate package (default: false)
+            verbose: true,
+            // Emit errors instead of warnings (default: false)
+            emitError: true,
+            // Show help message if duplicate packages are found (default: true)
+            showHelp: false,
+            // Warn also if major versions differ (default: true)
+            strict: true,
+            /**
+             * Exclude instances of packages from the results.
+             * If all instances of a package are excluded, or all instances except one,
+             * then the package is no longer considered duplicated and won't be emitted as a warning/error.
+             * @param {Object} instance
+             * @param {string} instance.name The name of the package
+             * @param {string} instance.version The version of the package
+             * @param {string} instance.path Absolute path to the package
+             * @param {?string} instance.issuer Absolute path to the module that requested the package
+             * @returns {boolean} true to exclude the instance, false otherwise
+             */
+            exclude(instance) {
+                return instance.name === "fbjs";
             }
-        ]),
+        }),
 
         // Makes some environment variables available in index.html.
         // The public URL is available as %PUBLIC_URL% in index.html, e.g.:

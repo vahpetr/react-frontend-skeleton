@@ -15,6 +15,9 @@ export class DefaultGithubApi extends BaseApi implements GithubApi {
         filter: GithubFilter
     ): AppFetchPromise<GithubCommitActivity> => {
         const { owner, repo } = filter.urn;
-        return this.get<GithubCommitActivity>(`/repos/${owner}/${repo}/stats/commit_activity`, filter.query);
+        return this.get<GithubCommitActivity>(
+            `/repos/${owner}/${repo}/stats/commit_activity`,
+            filter.query
+        );
     };
 }

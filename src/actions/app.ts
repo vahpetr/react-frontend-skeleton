@@ -7,8 +7,8 @@ import {
     AppAction,
     AppActionVariant,
     AppFailAction,
-    AppFailedFetch,
-    AppFetch,
+    AppFailedFetchResult,
+    AppFetchResult,
     AppLoadingAction,
     AppPartial,
     AppSuccessAction
@@ -42,7 +42,7 @@ export const appRejectAction = (type: string): AppFailAction<string> => ({
 
 export const appFailAction = (
     type: string,
-    fail: AppFailedFetch
+    fail: AppFailedFetchResult
 ): AppFailAction<string> => ({
     error: fail.error,
     status: fail.status,
@@ -75,7 +75,7 @@ export const appLoadAction = (type: string): AppLoadingAction<string> => ({
 
 export const appAction = <PAYLOAD>(
     type: string,
-    response: AppFetch<PAYLOAD>
+    response: AppFetchResult<PAYLOAD>
 ): AppActionVariant<string, PAYLOAD> => {
     switch (response.status) {
         case AppStatusType.SUCCESS: {
@@ -98,12 +98,12 @@ export const appHideSidebarAction = (): AppAction<AppPartial<AppState>> => ({
     payload: {
         sidebar: AppVisualStateType.HIDDEN
     },
-    type: AppActionType.APP_ADD_STATE,
+    type: AppActionType.APP_ADD_STATE
 });
 
 export const appShowSidebarAction = (): AppAction<AppPartial<AppState>> => ({
     payload: {
         sidebar: AppVisualStateType.HIDDEN
     },
-    type: AppActionType.APP_REMOVE_STATE,
+    type: AppActionType.APP_REMOVE_STATE
 });

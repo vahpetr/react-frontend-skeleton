@@ -13,7 +13,10 @@ fontawesome.library.add(icon);
 export class AppHomeIconComponent extends React.Component {
     public render(): JSX.Element {
         return (
-            <div className="mx-auto" style={{ width: 20, display: "inline-block" }}>
+            <div
+                className="mx-auto"
+                style={{ width: 20, display: "inline-block" }}
+            >
                 <AppIconComponent
                     prefix={AppIconPrefixType.FAS}
                     icon={AppIconNameType.HOME}

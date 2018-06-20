@@ -15,6 +15,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import createLogger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 import { ConnectedApp } from "src/app";
+import { AppChangelogComponent } from "src/components/app/page-changelog";
 import { AppPageNotFoundComponent } from "src/components/app/page-not-found";
 import {
     appInitialRootState,
@@ -22,7 +23,8 @@ import {
     AppRootState
 } from "src/modules/app";
 import { ConnectedHome } from "src/modules/home/component";
-import registerServiceWorker from "src/registerServiceWorker";
+// tslint:disable-next-line:no-commented-code
+// import registerServiceWorker from "src/registerServiceWorker";
 import { appRootSaga } from "src/sagas/app";
 
 const composeEnhancers = composeWithDevTools({
@@ -67,6 +69,11 @@ render(
             <ConnectedApp>
                 <ConnectedSwitch>
                     <Route exact={true} path="/" component={ConnectedHome} />
+                    <Route
+                        exact={true}
+                        path="/changelog"
+                        component={AppChangelogComponent}
+                    />
                     <Route path="*" component={AppPageNotFoundComponent} />
                 </ConnectedSwitch>
             </ConnectedApp>
@@ -75,4 +82,6 @@ render(
     document.getElementById("root")
 );
 
-registerServiceWorker();
+// temporarily disable service worker, need prevent coverage and documentation handling
+// tslint:disable-next-line:no-commented-code
+// registerServiceWorker();

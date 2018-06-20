@@ -33,6 +33,7 @@
     "config",
     "test",
     "coverage",
+    "documentation",
     ".vscode"
   ]
 }

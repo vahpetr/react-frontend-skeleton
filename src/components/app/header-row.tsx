@@ -1,9 +1,9 @@
 import * as React from "react";
 import { AppStatusType } from "src/constants/app";
-import { AppStateProps } from "src/contracts/app";
+import { AppState } from "src/contracts/app";
 
 export interface AppHeaderRowState<VIEW> {
-    state: AppStateProps<VIEW>;
+    state: AppState<VIEW>;
 }
 
 export class AppHeaderRowComponent<VIEW> extends React.Component<

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { AppHomeIconComponent } from "src/components/app/icons/home";
 
 export class HomeSidebarComponent extends React.Component {
-
     public render(): JSX.Element {
         return (
             <div className="sidebar">
@@ -11,7 +10,7 @@ export class HomeSidebarComponent extends React.Component {
                     <ul className="nav">
                         <li className="nav-item">
                             <Link to={"/"} className="nav-link active">
-                                <AppHomeIconComponent/> Home
+                                <AppHomeIconComponent /> Home
                                 <span className="badge badge-info">NEW</span>
                             </Link>
                         </li>

@@ -5,4 +5,8 @@ acceptance-tests
 webpack
 jest
 coverage
+documentation
 .vscode
+.editorconfig
+.gitignore
+sonar-project.properties

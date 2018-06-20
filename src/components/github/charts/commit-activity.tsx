@@ -18,11 +18,11 @@ import { AppHeaderRowComponent } from "src/components/app/header-row";
 import { AppStatusType } from "src/constants/app";
 import { AppDispatch } from "src/contracts/app";
 import { GithubCommitActivity, GithubFilter } from "src/contracts/github";
-import { GithubStateProps } from "src/contracts/github";
+import { GithubState } from "src/contracts/github";
 
 export interface GithubCommitActivityChartState {
     filter: GithubFilter;
-    commitActivity: GithubStateProps<GithubCommitActivity>;
+    commitActivity: GithubState<GithubCommitActivity>;
 }
 
 export type GithubCommitActivityChartProps = GithubCommitActivityChartState &

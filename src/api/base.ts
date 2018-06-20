@@ -5,16 +5,16 @@ import { AppStatusType, AppSystemType } from "src/constants/app";
 import {
     ApiErrorDetail,
     AppError,
-    AppFetch,
-    AppFetchPromise
+    AppFetchPromise,
+    AppFetchResult
 } from "src/contracts/app";
 
 export interface AppApiResponse<RESULT> extends AxiosResponse<RESULT> {
-    fetch: AppFetch<RESULT>;
+    fetch: AppFetchResult<RESULT>;
 }
 
 export interface AppApiError<RESULT> extends AxiosError {
-    fetch: AppFetch<RESULT>;
+    fetch: AppFetchResult<RESULT>;
 }
 
 export class BaseApi {
@@ -25,7 +25,7 @@ export class BaseApi {
         this.transport = axios.create({
             baseURL,
             headers: {
-                Accept: "application/json",
+                Accept: "application/json"
             },
             maxContentLength: 256,
             maxRedirects: 3,
@@ -50,7 +50,7 @@ export class BaseApi {
         headers: {} = this.headers
     ): AppFetchPromise<T> {
         const source = axios.CancelToken.source();
-        const request = this.transport.get<AppFetch<T>>(url, {
+        const request = this.transport.get<AppFetchResult<T>>(url, {
             cancelToken: source.token,
             headers,
             params: filter
@@ -82,7 +82,7 @@ export class BaseApi {
 
     private successHandler<RESULT>(
         axiosResponse: AxiosResponse<RESULT>
-    ): AppFetch<RESULT> {
+    ): AppFetchResult<RESULT> {
         try {
             // TODO change setup axios to parse json here
             const { data } = axiosResponse;
@@ -99,7 +99,7 @@ export class BaseApi {
         }
     }
 
-    private errorHandler<RESULT>(error: AxiosError): AppFetch<RESULT> {
+    private errorHandler<RESULT>(error: AxiosError): AppFetchResult<RESULT> {
         if (axios.isCancel(error)) {
             return {
                 error: this.buildError("Request canceled."),
