@@ -1,0 +1,47 @@
+.app-logo {
+    -webkit-transition: width .3s ease-in-out;
+    -o-transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+
+    color: $gray-900;
+    display: block;
+    float: left;
+    height: $navbar-height;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0 15px;
+    overflow: hidden;
+    font-size: 20px;
+    line-height: $navbar-height;
+    text-align: center;
+    font-weight: 300;
+
+    &:focus,
+    &:hover {
+        text-decoration: none;
+        color: $gray-900;
+    }
+    b {
+        font-weight: 700;
+    }
+
+    >.app-logo-lg {
+        display: none;
+        width: 200px;
+    }
+    >.app-logo-mini {
+        display: block;
+        margin-left: -15px;
+        margin-right: -15px;
+        font-size: 18px;
+        width: $navbar-brand-minimized-width;
+    }
+    
+    @include media-breakpoint-up(lg) {
+        >.app-logo-lg {
+            display: block;
+        }
+        >.app-logo-mini {
+            display: none;
+        }
+    }
+}

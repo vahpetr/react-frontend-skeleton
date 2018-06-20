@@ -1,0 +1,8 @@
+Dockerfile
+node_modules
+build
+acceptance-tests
+webpack
+jest
+coverage
+.vscode

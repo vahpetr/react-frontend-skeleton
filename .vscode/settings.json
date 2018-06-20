@@ -1,0 +1,5 @@
+{
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "jest.pathToJest": "node_modules/.bin/jest --env=jsdom --verbose",
+    "terminal.integrated.shellArgs.osx": []
+}
