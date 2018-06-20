@@ -10,18 +10,18 @@ export enum GithubActionType {
     GITHUB_FILTER_UPDATE_INIT = "GITHUB_FILTER_UPDATE_INIT"
 }
 
-export const githubCommitActivityFetchInit = (
+export const githubCommitActivityFetchInitAction = (
     filter: GithubFilter
 ): AppAction<GithubFilter> => ({
     payload: filter,
     type: GithubActionType.GITHUB_COMMIT_ACTIVITY_FETCH_INIT
 });
 
-export const githubCommitActivityFetchReject = (): Action => ({
+export const githubCommitActivityFetchRejectAction = (): Action => ({
     type: GithubActionType.GITHUB_COMMIT_ACTIVITY_FETCH_REJECT
 });
 
-export const githubFilterUpdate = (
+export const githubFilterUpdateAction = (
     filter: GithubFilter
 ): AppAction<GithubFilter> => ({
     payload: filter,

@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import { AppVisualStateType } from "src/constants/app";
 import { AppAction, AppPartial } from "src/contracts/app";
 import { HomeState } from "src/modules/home/component";
-import { homeInitialState, homeReducer } from "src/modules/home/reducers";
+import { homeInitialState, homeReducer } from "src/modules/home/reducer";
 
 export interface AppState {
     asideMenu: AppVisualStateType;
@@ -13,7 +13,7 @@ export interface AppState {
 
 export interface AppRootState {
     app: AppState;
-    router?: RouterState;
+    router: RouterState;
     home: HomeState;
 }
 

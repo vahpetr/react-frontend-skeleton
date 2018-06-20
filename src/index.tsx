@@ -5,14 +5,23 @@ import "src/styles/site.scss";
 import createHistory from "history/createBrowserHistory";
 import * as React from "react";
 import { render } from "react-dom";
-import { Provider } from "react-redux";
+import { hot } from "react-hot-loader";
+import { connect, Provider } from "react-redux";
+import { SwitchProps } from "react-router";
+import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter, routerMiddleware } from "react-router-redux";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createLogger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
-import { App } from "src/app";
-import { appInitialRootState, appRootReducer } from "src/modules/app";
+import { ConnectedApp } from "src/app";
+import { AppPageNotFoundComponent } from "src/components/app/page-not-found";
+import {
+    appInitialRootState,
+    appRootReducer,
+    AppRootState
+} from "src/modules/app";
+import { ConnectedHome } from "src/modules/home/component";
 import registerServiceWorker from "src/registerServiceWorker";
 import { appRootSaga } from "src/sagas/app";
 
@@ -43,10 +52,24 @@ sagaMiddleware.run(appRootSaga);
 // http://stackoverflow.com/q/43057911/340760
 // const history = syncHistoryWithStore(createBrowserHistory() as any, store);
 
+const ConnectedSwitch = hot(module)(
+    connect(
+        (state: AppRootState): SwitchProps => ({
+            location: state.router.location || undefined
+        }),
+        () => ({})
+    )(Switch)
+);
+
 render(
-    <Provider store={store} key="provider">
+    <Provider store={store}>
         <ConnectedRouter history={history}>
-            <App />
+            <ConnectedApp>
+                <ConnectedSwitch>
+                    <Route exact={true} path="/" component={ConnectedHome} />
+                    <Route path="*" component={AppPageNotFoundComponent} />
+                </ConnectedSwitch>
+            </ConnectedApp>
         </ConnectedRouter>
     </Provider>,
     document.getElementById("root")

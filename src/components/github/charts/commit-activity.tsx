@@ -6,7 +6,7 @@ addMore(highstock);
 addExporting(highstock);
 
 import * as React from "react";
-import { githubFilterUpdate } from "src/actions/github";
+import { githubFilterUpdateAction } from "src/actions/github";
 import {
     AppChartComponent,
     AppChartView,
@@ -47,6 +47,7 @@ export class GithubCommitActivityChartComponent extends React.Component<
                             <h4 className="mb-0 card-title">Commit activity</h4>
                         </div>
                     </div>
+                    <AppHeaderRowComponent state={this.props.commitActivity} />
                     <div className="row">
                         <div className="col col-sm-4">
                             <div className="form-group">
@@ -73,7 +74,6 @@ export class GithubCommitActivityChartComponent extends React.Component<
                             </div>
                         </div>
                     </div>
-                    <AppHeaderRowComponent state={this.props.commitActivity} />
                     <AppDescriptionRowComponent
                         state={this.props.commitActivity}
                     />
@@ -87,14 +87,14 @@ export class GithubCommitActivityChartComponent extends React.Component<
         const { dispatch, filter } = this.props;
         const newFilter = { ...filter };
         newFilter.urn.owner = ev.target.value;
-        dispatch(githubFilterUpdate(newFilter));
+        dispatch(githubFilterUpdateAction(newFilter));
     };
 
     public handlerChangeRepo = (ev: React.ChangeEvent<HTMLInputElement>) => {
         const { dispatch, filter } = this.props;
         const newFilter = { ...filter };
         newFilter.urn.repo = ev.target.value;
-        dispatch(githubFilterUpdate(newFilter));
+        dispatch(githubFilterUpdateAction(newFilter));
     };
 
     public drawChart(highchartView: AppChartView | null): JSX.Element | null {

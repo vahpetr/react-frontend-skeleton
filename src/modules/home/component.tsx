@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { Dispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Action } from "redux";
-import { githubCommitActivityFetchInit } from "src/actions/github";
+import { appShowSidebarAction } from "src/actions/app";
+import { githubCommitActivityFetchInitAction } from "src/actions/github";
 import { GithubCommitActivityChartComponent } from "src/components/github/charts/commit-activity";
 import { HomeSidebarComponent } from "src/components/home/sidebar";
 import { AppDispatch } from "src/contracts/app";
@@ -23,7 +24,8 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     public componentDidMount(): void {
         const { dispatch, homeFilter } = this.props;
 
-        dispatch(githubCommitActivityFetchInit(homeFilter.githubFilter));
+        dispatch(githubCommitActivityFetchInitAction(homeFilter.githubFilter));
+        dispatch(appShowSidebarAction());
     }
 
     public render(): JSX.Element {
@@ -56,8 +58,7 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     }
 }
 
-export const mapStateToProps = (state: AppRootState): HomeState =>
-    state.home;
+export const mapStateToProps = (state: AppRootState): HomeState => state.home;
 
 export const mapDispatchToProps = (
     dispatch: Dispatch<Action>
