@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { Dispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Action } from "redux";
-import { appShowSidebarAction } from "src/actions/app";
+// tslint:disable-next-line:no-commented-code
+// import { appShowSidebarAction } from "src/actions/app";
 import { githubCommitActivityFetchInitAction } from "src/actions/github";
 import { GithubCommitActivityChartComponent } from "src/components/github/charts/commit-activity";
 import { HomeSidebarComponent } from "src/components/home/sidebar";
@@ -25,7 +26,8 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
         const { dispatch, homeFilter } = this.props;
 
         dispatch(githubCommitActivityFetchInitAction(homeFilter.githubFilter));
-        dispatch(appShowSidebarAction());
+        // tslint:disable-next-line:no-commented-code
+        // dispatch(appShowSidebarAction());
     }
 
     public render(): JSX.Element {
