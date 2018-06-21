@@ -10,3 +10,4 @@ documentation
 .editorconfig
 .gitignore
 sonar-project.properties
+docker-compose.yaml
