@@ -28,8 +28,14 @@ npm run test
 ## Run app in docker
 
 ```sh
-    docker build -t frontend-skeleton .
-    docker run -it --rm -p 10080:80 --name frontend-skeleton frontend-skeleton
+docker build -t frontend-skeleton .
+docker run -it --rm -p 80:80 --name frontend-skeleton frontend-skeleton
+```
+
+Or
+
+```sh
+docker-compose up
 ```
 
 ### TODO
