@@ -12,7 +12,7 @@
     "test": "node scripts/test.js --verbose --env=jsdom --coverage",
     "update": "ncu -u",
     "ncu": "ncu",
-    "reinstall": "rimraf node_modules && npm install",
+    "reinstall": "rimraf node_modules && npm install && npm audit fix --force",
     "tsc": "tsc",
     "tslint": "tslint --fix -c tslint.json -e **/node_modules/** -e **/build/** **/*.ts*",
     "documentation": "typedoc  --out ./documentation --tsconfig ./tsconfig.json ./src"
@@ -85,7 +85,7 @@
     "stats-webpack-plugin": "0.6.2",
     "style-loader": "0.21.0",
     "sw-precache-webpack-plugin": "0.11.5",
-    "ts-jest": "22.4.4",
+    "ts-jest": "22.4.6",
     "ts-loader": "3.5.0",
     "tsconfig-paths-webpack-plugin": "3.0.4",
     "tslint": "5.9.1",

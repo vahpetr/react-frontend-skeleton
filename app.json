@@ -1,0 +1,8 @@
+{
+  "name": "react-frontend-skeleton",
+  "description": "React-typescript web project",
+  "repository": "https://github.com/vahpetr/react-frontend-skeleton",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1024px-React-icon.svg.png",
+  "keywords": ["typescript", "react", "redux", "saga", "typedoc", "jest", "coverage", "nginx", "docker"],
+  "stack": "container"
+}

@@ -36,6 +36,15 @@ export class GithubCommitActivityChartComponent extends React.Component<
         super(props);
     }
 
+    public isSkipped(): boolean {
+        if (this.props.commitActivity.status === AppStatusType.SUCCESS) {
+            if (!this.props.commitActivity.view.length) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public render(): JSX.Element {
         const options = this.buildConfig(this.props);
 
@@ -77,7 +86,7 @@ export class GithubCommitActivityChartComponent extends React.Component<
                     <AppDescriptionRowComponent
                         state={this.props.commitActivity}
                     />
-                    {this.drawChart(options)}
+                    {this.isSkipped() ? <p>Github skipped request.</p> : this.drawChart(options)}
                 </div>
             </div>
         );

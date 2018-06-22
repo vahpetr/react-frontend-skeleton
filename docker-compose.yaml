@@ -4,6 +4,7 @@ services:
 
   web:
     build: .
+    env_file:
+      - .env
     ports:
-     - 80:80
-  
+     - 80:${PORT}

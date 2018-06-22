@@ -1,11 +1,12 @@
 # Frontend skeleton
 
-Frintend skeleton web app
+Frintend skeleton web app. Deployed on Heroku [react-frontend-skeleton.herokuapp.com](https://react-frontend-skeleton.herokuapp.com/). First open can be slow, the node can sleep.
 
 ## Installation
 
 ```bash
 npm install
+echo "PORT=80" >> .env
 ```
 
 ## Run app
@@ -36,6 +37,17 @@ Or
 
 ```sh
 docker-compose up
+```
+
+## Deploy on Heroku
+
+```sh
+heroku update
+heroku create
+heroku container:login
+heroku container:push web
+heroku container:release web
+heroku open
 ```
 
 ### TODO

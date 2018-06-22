@@ -9,5 +9,8 @@ documentation
 .vscode
 .editorconfig
 .gitignore
+.git
 sonar-project.properties
-docker-compose.yaml
+*.yml
+app.json
+.env
