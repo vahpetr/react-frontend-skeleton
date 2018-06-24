@@ -147,23 +147,27 @@ module.exports = {
             // Support React Native Web
             // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
             "react-native": "react-native-web",
-
-            isarray: path.resolve(
+            "react-router": path.resolve(
                 __dirname,
                 "..",
                 "node_modules",
-                "buffer",
+                "react-router-dom",
                 "node_modules",
-                "isarray"
+                "react-router"
             ),
-            "hash-base": path.resolve(
+            warning: path.resolve(
                 __dirname,
                 "..",
                 "node_modules",
-                "md5.js",
+                "react-router-dom",
                 "node_modules",
-                "hash-base"
+                "warning"
             )
+            // /node_modules/react-router-dom/node_modules/react-router/es/MemoryRouter.js
+            // /node_modules/react-router/es/index.js
+            // Multiple versions of react-router found:
+            // 4.3.1 ./~/react-router-dom/~/react-router from ./~/react-router-dom/es/MemoryRouter.js
+            // 4.2.0 ./~/react-router from ./~/react-router/es/index.js
         },
         plugins: [
             // Prevents users from importing files from outside of src/ (or node_modules/).

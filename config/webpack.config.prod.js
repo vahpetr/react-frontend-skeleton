@@ -176,21 +176,21 @@ module.exports = {
             // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
             "react-native": "react-native-web",
 
-            isarray: path.resolve(
+            "react-router": path.resolve(
                 __dirname,
                 "..",
                 "node_modules",
-                "buffer",
+                "react-router-dom",
                 "node_modules",
-                "isarray"
+                "react-router"
             ),
-            "hash-base": path.resolve(
+            warning: path.resolve(
                 __dirname,
                 "..",
                 "node_modules",
-                "md5.js",
+                "react-router-dom",
                 "node_modules",
-                "hash-base"
+                "warning"
             )
         },
         plugins: [
