@@ -30,6 +30,7 @@ export const appRejectAction = (type: string): AppFailAction<string> => ({
         details: [
             {
                 data: "Action canceled.",
+                source: location.host,
                 system: AppSystemType.FRONTEND
             }
         ],
@@ -58,6 +59,7 @@ export const appClientErrorAction = (
         details: [
             {
                 data: error.stack ? error.stack : "Unhandled error.",
+                source: location.host,
                 system: AppSystemType.FRONTEND
             }
         ],
@@ -94,14 +96,14 @@ export const appAction = <PAYLOAD>(
     }
 };
 
-export const appHideSidebarAction = (): AppAction<AppPartial<AppState>> => ({
+export const appSidebarHideAction = (): AppAction<AppPartial<AppState>> => ({
     payload: {
         sidebar: AppVisualStateType.HIDDEN
     },
     type: AppActionType.APP_ADD_STATE
 });
 
-export const appShowSidebarAction = (): AppAction<AppPartial<AppState>> => ({
+export const appSidebarShowAction = (): AppAction<AppPartial<AppState>> => ({
     payload: {
         sidebar: AppVisualStateType.HIDDEN
     },

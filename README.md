@@ -1,6 +1,6 @@
 # Frontend skeleton
 
-Frintend skeleton web app. Deployed on Heroku [react-frontend-skeleton.herokuapp.com](https://react-frontend-skeleton.herokuapp.com/). First open can be slow, the node can sleep.
+Frontend skeleton web app. Deployed on Heroku [react-frontend-skeleton.herokuapp.com](https://react-frontend-skeleton.herokuapp.com/). First open can be slow, the node can sleep.
 
 ## Installation
 
@@ -22,7 +22,7 @@ npm run build
 ## Running tests
 
 ```bash
-# unit tests
+# all tests
 npm run test
 ```
 
@@ -52,5 +52,5 @@ heroku open
 
 ### TODO
 
-1. Add more comonent tests
+1. Add more component tests
 1. Add saga tests

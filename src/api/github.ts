@@ -8,7 +8,7 @@ import {
 
 export class DefaultGithubApi extends BaseApi implements GithubApi {
     constructor() {
-        super("https://api.github.com");
+        super("api.github.com");
     }
 
     public getCommitActivity = (

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AppEmptySidebarComponent } from "src/components/app/empty-sidebar";
 
-export class AppChangelogComponent extends React.Component {
+export class AppPageChangelogComponent extends React.Component {
     public render(): JSX.Element {
         return (
             <div className="app-body">
@@ -19,6 +19,8 @@ export class AppChangelogComponent extends React.Component {
                                                 </h5>
                                                 <ul>
                                                     <li>0.1.0 Initial</li>
+                                                    <li>0.2.0 Add auto-generated documentation</li>
+                                                    <li>0.3.0 Add auto-generated coverage</li>
                                                 </ul>
                                             </div>
                                         </div>

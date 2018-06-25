@@ -1,4 +1,4 @@
-FROM node:9.11.1-alpine AS builder
+FROM node:10.5.0-alpine AS builder
 WORKDIR /app
 RUN apk add --update git python2 make g++
 # Add sources

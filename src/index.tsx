@@ -5,7 +5,6 @@ import "src/styles/site.scss";
 import createHistory from "history/createBrowserHistory";
 import * as React from "react";
 import { render } from "react-dom";
-import { hot } from "react-hot-loader";
 import { connect, Provider } from "react-redux";
 import { SwitchProps } from "react-router";
 import { Route, Switch } from "react-router-dom";
@@ -14,15 +13,15 @@ import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createLogger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
-import { ConnectedApp } from "src/app";
-import { AppChangelogComponent } from "src/components/app/page-changelog";
+import { HotConnectedApp } from "src/app";
+import { AppPageChangelogComponent } from "src/components/app/page-changelog";
 import { AppPageNotFoundComponent } from "src/components/app/page-not-found";
 import {
     appInitialRootState,
     appRootReducer,
     AppRootState
 } from "src/modules/app";
-import { ConnectedHome } from "src/modules/home/component";
+import { HotConnectedHome } from "src/modules/home/component";
 // tslint:disable-next-line:no-commented-code
 // import registerServiceWorker from "src/registerServiceWorker";
 import { appRootSaga } from "src/sagas/app";
@@ -54,29 +53,27 @@ sagaMiddleware.run(appRootSaga);
 // http://stackoverflow.com/q/43057911/340760
 // const history = syncHistoryWithStore(createBrowserHistory() as any, store);
 
-const ConnectedSwitch = hot(module)(
-    connect(
-        (state: AppRootState): SwitchProps => ({
-            location: state.router.location || undefined
-        }),
-        () => ({})
-    )(Switch)
-);
+const ConnectedSwitch = connect(
+    (state: AppRootState): SwitchProps => ({
+        location: state.router.location || undefined
+    }),
+    () => ({})
+)(Switch);
 
 render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <ConnectedApp>
+            <HotConnectedApp>
                 <ConnectedSwitch>
-                    <Route exact={true} path="/" component={ConnectedHome} />
+                    <Route exact={true} path="/" component={HotConnectedHome} />
                     <Route
                         exact={true}
                         path="/changelog"
-                        component={AppChangelogComponent}
+                        component={AppPageChangelogComponent}
                     />
                     <Route path="*" component={AppPageNotFoundComponent} />
                 </ConnectedSwitch>
-            </ConnectedApp>
+            </HotConnectedApp>
         </ConnectedRouter>
     </Provider>,
     document.getElementById("root")

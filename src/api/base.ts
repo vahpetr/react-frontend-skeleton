@@ -21,9 +21,9 @@ export class BaseApi {
     protected headers: {};
     protected transport: AxiosInstance;
 
-    public constructor(baseURL: string) {
+    public constructor(protected baseURL: string) {
         this.transport = axios.create({
-            baseURL,
+            baseURL: "//" + baseURL,
             headers: {
                 Accept: "application/json"
             },
@@ -122,6 +122,7 @@ export class BaseApi {
                 const details: ApiErrorDetail[] = [
                     {
                         data: apiError,
+                        source: this.baseURL,
                         system: AppSystemType.BACKEND
                     }
                 ];

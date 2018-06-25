@@ -6,6 +6,7 @@ addMore(highstock);
 addExporting(highstock);
 
 import * as React from "react";
+import { hot } from "react-hot-loader";
 import { githubFilterUpdateAction } from "src/actions/github";
 import {
     AppChartComponent,
@@ -65,7 +66,8 @@ export class GithubCommitActivityChartComponent extends React.Component<
                                     id="owner"
                                     type="text"
                                     defaultValue={this.props.filter.urn.owner}
-                                    onBlur={this.handlerChangeOwner}
+                                    onBlur={this.handlerOwnerOnBlur}
+                                    onKeyPress={this.handlerOnKeyPress}
                                     className="form-control"
                                 />
                             </div>
@@ -77,7 +79,8 @@ export class GithubCommitActivityChartComponent extends React.Component<
                                     id="repo"
                                     type="text"
                                     defaultValue={this.props.filter.urn.repo}
-                                    onBlur={this.handlerChangeRepo}
+                                    onBlur={this.handlerRepoOnBlur}
+                                    onKeyPress={this.handlerOnKeyPress}
                                     className="form-control"
                                 />
                             </div>
@@ -86,24 +89,72 @@ export class GithubCommitActivityChartComponent extends React.Component<
                     <AppDescriptionRowComponent
                         state={this.props.commitActivity}
                     />
-                    {this.isSkipped() ? <p>Github skipped request.</p> : this.drawChart(options)}
+                    {this.isSkipped()
+                        ? this.skipMessage()
+                        : this.drawChart(options)}
                 </div>
             </div>
         );
     }
 
-    public handlerChangeOwner = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    public skipMessage(): JSX.Element {
+        return (
+            <div>
+                <p>Github skip request.</p>
+                <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={this.handlerRefresh}
+                >
+                    Refresh
+                </button>
+            </div>
+        );
+    }
+
+    public handlerRefresh = (_: React.MouseEvent<Element>): void => {
+        const { dispatch, filter } = this.props;
+        dispatch(githubFilterUpdateAction(filter));
+    };
+
+    public changeOwner = (newOwner: string) => {
         const { dispatch, filter } = this.props;
         const newFilter = { ...filter };
-        newFilter.urn.owner = ev.target.value;
+
+        newOwner = newOwner.trim();
+        if (newFilter.urn.owner.trim() === newOwner) {
+            return;
+        }
+
+        newFilter.urn.owner = newOwner;
         dispatch(githubFilterUpdateAction(newFilter));
     };
 
-    public handlerChangeRepo = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    public handlerOwnerOnBlur = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        this.changeOwner(ev.target.value);
+    };
+
+    public handlerOnKeyPress = (ev: React.KeyboardEvent<HTMLInputElement>) => {
+        if (ev.key === "Enter") {
+            ev.currentTarget.blur();
+        }
+    };
+
+    public changeRepo = (newRepo: string) => {
         const { dispatch, filter } = this.props;
         const newFilter = { ...filter };
-        newFilter.urn.repo = ev.target.value;
+
+        newRepo = newRepo.trim();
+        if (newFilter.urn.repo.trim() === newRepo) {
+            return;
+        }
+
+        newFilter.urn.repo = newRepo;
         dispatch(githubFilterUpdateAction(newFilter));
+    };
+
+    public handlerRepoOnBlur = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        this.changeRepo(ev.target.value);
     };
 
     public drawChart(highchartView: AppChartView | null): JSX.Element | null {
@@ -240,3 +291,5 @@ export class GithubCommitActivityChartComponent extends React.Component<
         } as AppChartView;
     }
 }
+
+export const HotGithubCommitActivityChartComponent = hot(module)(GithubCommitActivityChartComponent);

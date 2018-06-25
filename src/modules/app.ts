@@ -37,6 +37,10 @@ export enum AppActionType {
     APP_REMOVE_STATE = "APP_REMOVE_STATE"
 }
 
+export const hasFlag = (value: number, flag: number): boolean => {
+    return (value & flag) === flag;
+};
+
 export const appReducer = (
     state = appInitialState,
     action: AppAction<AppPartial<AppState>>
@@ -73,15 +77,21 @@ export const appReducer = (
             };
 
             if (action.payload.asideMenu) {
-                newState.asideMenu ^= action.payload.asideMenu;
+                if (hasFlag(newState.asideMenu, action.payload.asideMenu)) {
+                    newState.asideMenu ^= action.payload.asideMenu;
+                }
             }
 
             if (action.payload.header) {
-                newState.header ^= action.payload.header;
+                if (hasFlag(newState.header, action.payload.header)) {
+                    newState.header ^= action.payload.header;
+                }
             }
 
             if (action.payload.sidebar) {
-                newState.sidebar ^= action.payload.sidebar;
+                if (hasFlag(newState.sidebar, action.payload.sidebar)) {
+                    newState.sidebar ^= action.payload.sidebar;
+                }
             }
 
             return newState;

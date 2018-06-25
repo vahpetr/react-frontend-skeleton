@@ -16,7 +16,7 @@ export class AppFooterComponent extends React.Component {
                             <span className="ml-auto">
                                 <b>Version</b>
                                 &nbsp;
-                                <Link to={"/changelog"}>0.1.0</Link>
+                                <Link to={"/changelog"}>0.3.0</Link>
                             </span>
                         </div>
                         <div className="col">

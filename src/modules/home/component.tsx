@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { Dispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Action } from "redux";
-// tslint:disable-next-line:no-commented-code
-// import { appShowSidebarAction } from "src/actions/app";
+import { appSidebarShowAction } from "src/actions/app";
 import { githubCommitActivityFetchInitAction } from "src/actions/github";
-import { GithubCommitActivityChartComponent } from "src/components/github/charts/commit-activity";
+import { HotGithubCommitActivityChartComponent } from "src/components/github/charts/commit-activity";
 import { HomeSidebarComponent } from "src/components/home/sidebar";
 import { AppDispatch } from "src/contracts/app";
 import { GithubCommitActivity, GithubState } from "src/contracts/github";
@@ -25,9 +24,8 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     public componentDidMount(): void {
         const { dispatch, homeFilter } = this.props;
 
+        dispatch(appSidebarShowAction());
         dispatch(githubCommitActivityFetchInitAction(homeFilter.githubFilter));
-        // tslint:disable-next-line:no-commented-code
-        // dispatch(appShowSidebarAction());
     }
 
     public render(): JSX.Element {
@@ -45,7 +43,7 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
                         <div className="animated fadeIn">
                             <div className="row">
                                 <div className="col">
-                                    <GithubCommitActivityChartComponent
+                                    <HotGithubCommitActivityChartComponent
                                         dispatch={dispatch}
                                         filter={homeFilter.githubFilter}
                                         commitActivity={githubCommitActivity}
@@ -68,9 +66,9 @@ export const mapDispatchToProps = (
     dispatch
 });
 
-export const ConnectedHome = hot(module)(
-    connect<HomeState, AppDispatch, HomeProps>(
-        mapStateToProps,
-        mapDispatchToProps
-    )(HomeComponent)
-);
+export const ConnectedHome = connect<HomeState, AppDispatch, HomeProps>(
+    mapStateToProps,
+    mapDispatchToProps
+)(HomeComponent);
+
+export const HotConnectedHome = hot(module)(ConnectedHome);

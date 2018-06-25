@@ -33,6 +33,10 @@ export interface ApiErrorDetail {
      */
     data: {};
     /**
+     * Source(url) of error
+     */
+    source: string;
+    /**
      * Side of error. Place where error throw
      */
     system: AppSystemType;

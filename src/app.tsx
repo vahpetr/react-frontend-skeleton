@@ -5,7 +5,7 @@ import { Action } from "redux";
 import { AppFooterComponent } from "src/components/app/footer";
 import { AppHeaderComponent } from "src/components/app/header";
 import { AppDispatch } from "src/contracts/app";
-import { AppRootState, AppState } from "src/modules/app";
+import { AppRootState, AppState, hasFlag } from "src/modules/app";
 import { AppVisualStateType } from "./constants/app";
 
 // https://github.com/ReactTraining/react-router/blob/master/packages/react-router-redux/examples/AuthExample.js
@@ -27,35 +27,31 @@ export class AppComponent extends React.Component<AppProps, AppState> {
         const { asideMenu, header, sidebar } = this.props;
         const classNames = ["app"];
 
-        if (this.hasFlag(header, AppVisualStateType.FIXED)) {
+        if (hasFlag(header, AppVisualStateType.FIXED)) {
             classNames.push("header-fixed");
         }
 
-        if (this.hasFlag(header, AppVisualStateType.HIDDEN)) {
+        if (hasFlag(header, AppVisualStateType.HIDDEN)) {
             classNames.push("header-hidden");
         }
 
-        if (this.hasFlag(sidebar, AppVisualStateType.FIXED)) {
+        if (hasFlag(sidebar, AppVisualStateType.FIXED)) {
             classNames.push("sidebar-fixed");
         }
 
-        if (this.hasFlag(sidebar, AppVisualStateType.HIDDEN)) {
+        if (hasFlag(sidebar, AppVisualStateType.HIDDEN)) {
             classNames.push("sidebar-hidden");
         }
 
-        if (this.hasFlag(asideMenu, AppVisualStateType.FIXED)) {
+        if (hasFlag(asideMenu, AppVisualStateType.FIXED)) {
             classNames.push("aside-menu-fixed");
         }
 
-        if (this.hasFlag(asideMenu, AppVisualStateType.HIDDEN)) {
+        if (hasFlag(asideMenu, AppVisualStateType.HIDDEN)) {
             classNames.push("aside-menu-hidden");
         }
 
         return classNames.join(" ");
-    }
-
-    public hasFlag(value: number, flag: number): boolean {
-        return (value & flag) === flag;
     }
 }
 
@@ -67,9 +63,9 @@ export const mapDispatchToProps = (
     dispatch
 });
 
-export const ConnectedApp = hot(module)(
-    connect<AppState, AppDispatch>(
-        mapStateToProps,
-        mapDispatchToProps
-    )(AppComponent)
-);
+export const ConnectedApp = connect<AppState, AppDispatch>(
+    mapStateToProps,
+    mapDispatchToProps
+)(AppComponent);
+
+export const HotConnectedApp = hot(module)(ConnectedApp);
